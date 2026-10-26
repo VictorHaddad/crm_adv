@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Superfícies */
+    --background: 220 23% 97%;
+    --surface: 0 0% 100%;
+    --surface-muted: 216 22% 95%;
+    --border: 213 19% 91%;
+    --input: 213 19% 91%;
+
+    /* Texto */
+    --foreground: 208 46% 10%;
+    --muted-foreground: 208 14% 42%;
+
+    /* Marca */
+    --primary: 206 62% 12%;
+    --primary-foreground: 210 28% 96%;
+    --accent: 42 48% 47%;
+    --accent-foreground: 0 0% 100%;
+    --accent-hover: 41 50% 40%;
+    --ring: 42 48% 47%;
+
+    /* Feedback / criticidade */
+    --critical: 3 71% 41%;
+    --critical-foreground: 0 0% 100%;
+    --warning: 38 62% 46%;
+    --warning-foreground: 0 0% 100%;
+    --success: 154 46% 34%;
+    --success-foreground: 0 0% 100%;
+    --info: 205 54% 40%;
+    --info-foreground: 0 0% 100%;
+
+    --radius: 0.625rem;
+  }
+
+  .dark {
+    --background: 210 55% 9%;
+    --surface: 207 52% 12%;
+    --surface-muted: 206 51% 15%;
+    --border: 204 44% 21%;
+    --input: 204 44% 21%;
+
+    --foreground: 210 28% 93%;
+    --muted-foreground: 206 19% 63%;
+
+    --primary: 204 57% 21%;
+    --primary-foreground: 210 28% 96%;
+    --accent: 41 54% 54%;
+    --accent-foreground: 206 62% 12%;
+    --accent-hover: 43 59% 63%;
+    --ring: 41 54% 54%;
+
+    --critical: 3 71% 55%;
+    --critical-foreground: 0 0% 100%;
+    --warning: 38 62% 56%;
+    --warning-foreground: 206 62% 12%;
+    --success: 154 40% 45%;
+    --success-foreground: 0 0% 100%;
+    --info: 205 54% 55%;
+    --info-foreground: 206 62% 12%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Foco visível acessível */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Números tabulares para dados financeiros/tabelas */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar sutil e sóbria */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  /* Efeito shimmer para skeleton loaders */
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.06),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
